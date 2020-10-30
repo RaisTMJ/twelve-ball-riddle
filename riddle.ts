@@ -1,20 +1,23 @@
-function TwelveBallRiddle() {
+import { prompt } from 'prompts';
+
+
+function TwelveBallRiddle(random?: number, index?: number) {
     let scaleUse = 0;
     let weights = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
-    weights[Math.floor(Math.random() * 12)] = Math.random() * 2;
-// weights[0] = Math.random() * 2;
+    weights[index ? index : Math.floor(Math.random() * 12)] = random ? random : Math.random() * 2;
+    // weights[0] = Math.random() * 2;
     console.log(weights.join(', '))
 
     function sumValue(arrayGroup: number[]): number {
         return arrayGroup.reduce((sum: number, num: number) => sum + num)
     }
 
-// 0 for balance, 1 for testGroup heavier, and -1 if compareGroup lighter
+    // 0 for balance, 1 for testGroup heavier, and -1 if compareGroup lighter
     function UseScaleBalance(testGroup: number[], compareGroup: number[]): 0 | 1 | -1 {
         scaleUse++;
-        if(scaleUse > 3){
+        if (scaleUse > 3) {
             console.error('You already exceed use scale')
-            throw  'U failed';
+            throw 'U failed';
         }
         let val: number = sumValue(testGroup) - sumValue(compareGroup);
         console.log('Scale  use %s times, for  %s, %s', scaleUse, testGroup, compareGroup,);
@@ -24,7 +27,7 @@ function TwelveBallRiddle() {
     function comparingIfTestGroupHeavier(compareFunction: (testGroup: number[], compareGroup: number[]) => (0 | 1 | -1), balanceBall: number[], ball: any, unbalanceBall: number[]) {
         let val4 = compareFunction([balanceBall[0]], [balanceBall[1]]);
         if (val4 == 1) {
-            ball = balanceBall [0];
+            ball = balanceBall[0];
         } else if (val4 == 0) {
             ball = unbalanceBall[0];
         } else {
@@ -36,7 +39,7 @@ function TwelveBallRiddle() {
     function comparingIfTestGroupLighter(compareFunction: (testGroup: number[], compareGroup: number[]) => (0 | 1 | -1), balanceBall: number[], ball: any, unbalanceBall: number[]) {
         let val4 = compareFunction([balanceBall[0]], [balanceBall[1]]);
         if (val4 == -1) {
-            ball = balanceBall [0];
+            ball = balanceBall[0];
         } else if (val4 == 0) {
             ball = unbalanceBall[0];
         } else {
@@ -130,16 +133,50 @@ function TwelveBallRiddle() {
     return true;
 }
 
-let tryAgain: boolean = true
-let testCount: number  = 0
-while (tryAgain) {
-    console.log('-------------------------------------------------------')
-    tryAgain = TwelveBallRiddle()
-    if(testCount >1000){
-        console.log('You already test it 1000 times');
-        tryAgain = false;
-    }
-    testCount++;
-    console.log('--------------------------------------------------------')
+
+
+function input() {
+    (async () => {
+        const response = await prompt({
+            type: 'text',
+            name: 'value',
+            message: 'Do you want to test manually y/n',
+        }
+        )
+        if (response['value'] == 'y') {
+            const response2 = await prompt({
+                type: 'number',
+                name: 'value',
+                message: 'Type a value yo place the value in ball set',
+            })
+            for (let i = 12; i > 0; i--) {
+                TwelveBallRiddle(response2['value'], i)
+
+            }
+            console.log('success')
+
+        }
+        else if (response['value'] == 'n') {
+            let tryAgain: boolean = true
+            let testCount: number = 0
+            while (tryAgain) {
+                console.log('-------------------------------------------------------')
+                tryAgain = TwelveBallRiddle()
+                if (testCount > 1000) {
+                    console.log('You already test it 1000 times');
+                    tryAgain = false;
+                }
+                testCount++;
+                console.log('--------------------------------------------------------')
+
+            }
+
+        } else {
+            input();
+        }
+
+    })();
 
 }
+
+input()
