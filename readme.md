@@ -33,4 +33,5 @@ There is while loop checking the riddle.
 
 ## how to run program
 tsc riddle.ts
+
 node riddle.js
