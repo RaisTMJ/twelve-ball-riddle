@@ -1,3 +1,5 @@
+[![Gitpod ready-to-code](https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/RaisTMJ/twelve-ball-riddle)
+
 # 12 ball riddle that mention in broklyn 99 
 
 [![Watch the video](preview-image.png)](https://www.youtube.com/watch?v=cCOUmCy691s) 
