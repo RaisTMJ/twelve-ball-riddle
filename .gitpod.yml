@@ -2,5 +2,5 @@ image:
   file: .gitpod.Dockerfile
 
 tasks:
-  - init: tsc riddle
+  - init:  npm i && tsc riddle
     command: node riddle.js
