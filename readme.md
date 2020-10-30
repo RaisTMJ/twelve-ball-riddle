@@ -1,6 +1,6 @@
 [![Gitpod ready-to-code](https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/RaisTMJ/twelve-ball-riddle)
 
-# 12 ball (Hman in island) riddle that mention in brooklyn nine-nine
+# 12 ball (Human in island) riddle that mention in brooklyn nine-nine
 
 [![Watch the video](preview-image.png)](https://www.youtube.com/watch?v=cCOUmCy691s) 
 [![Watch the video](https://i.redd.it/tm8603g4rdmx.gif)](https://www.youtube.com/watch?v=cCOUmCy691s)
