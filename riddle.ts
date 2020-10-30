@@ -136,6 +136,7 @@ function TwelveBallRiddle(random?: number, index?: number) {
 
 
 function input() {
+    // @ts-ignore
     (async () => {
         const response = await prompt({
             type: 'text',
