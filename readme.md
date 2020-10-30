@@ -1,1 +1,1 @@
-broklynn 99 [![Watch the video](https://img.youtube.com/vi/T-D1KVIuvjA/maxresdefault.jpg)](https://youtu.be/T-D1KVIuvjA)
+broklynn 99 [![Watch the video](https://i.redd.it/tm8603g4rdmx.gif)](https://www.youtube.com/watch?v=cCOUmCy691s)
