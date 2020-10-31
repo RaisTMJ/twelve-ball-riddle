@@ -157,7 +157,7 @@ function input() {
                 name: 'value',
                 message: 'Type a value yo place the value in ball set',
             })
-            for (let i = 12; i > 0; i--) {
+            for (let i = 11; i >= 0; i--) {
                 TwelveBallRiddle(response2['value'], i)
 
             }
