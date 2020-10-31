@@ -90,6 +90,15 @@ function TwelveBallRiddle(random, index) {
         }
         return ball;
     }
+    function twoBallComparison(groupTest, compareBall) {
+        var val3 = UseScaleBalance(groupTest.slice(0, 1), compareBall);
+        if (val3 != 0) {
+            ball = groupTest[0];
+        }
+        else {
+            ball = groupTest[1];
+        }
+    }
     //1) start split to 6 subset and 3 group; todo
     // createSubset
     var subSetA = weights.slice(0, 2);
@@ -102,25 +111,17 @@ function TwelveBallRiddle(random, index) {
     var group2 = __spreadArrays(subSetC, subSetD);
     var group3 = __spreadArrays(subSetE, subSetF);
     var ball = 'unknown';
-    function twoBallComparison(groupTest, compareBall) {
-        var val3 = UseScaleBalance(groupTest.slice(0, 1), compareBall);
-        if (val3 != 0) {
-            ball = groupTest[0];
-        }
-        else {
-            ball = groupTest[1];
-        }
-    }
     // first main compare of group todo
     switch (UseScaleBalance(group1, group2)) {
         case 1: {
-            var groupTest1 = __spreadArrays(subSetC, subSetA);
-            var groupTest2 = __spreadArrays([subSetD[0], subSetB[0]], subSetE);
-            var groupTest3 = [subSetD[1], subSetB[1]];
-            var val2 = UseScaleBalance(groupTest1, groupTest2);
+            var rightGroup = __spreadArrays(subSetC, subSetA); // swap 2 item from 2 left group 1 member go to left group one go to unscale group
+            var leftGroup = __spreadArrays([subSetD[0], subSetB[0]], subSetE); // swap 1 item from right group 1 item go to right group 1 item go to unscale group ammd additional 2 normal ball to make it balance
+            var unScaleGroup = [subSetD[1], subSetB[1]]; // 2 item from both group that did not go to scale.
+            var val2 = UseScaleBalance(rightGroup, leftGroup);
+            // swap between an element ^ todo then compare case left heavier than right
             switch (val2) {
                 case 0: {
-                    twoBallComparison(groupTest3, subSetE.slice(0, 1));
+                    twoBallComparison(unScaleGroup, subSetE.slice(0, 1));
                     break;
                 }
                 case -1: {
@@ -135,14 +136,14 @@ function TwelveBallRiddle(random, index) {
             break;
         }
         case -1: {
-            var groupTest1 = __spreadArrays(subSetC, subSetA);
-            var groupTest2 = __spreadArrays([subSetD[0], subSetB[0]], subSetE);
-            var groupTest3 = [subSetD[1], subSetB[1]];
-            // swap between an element ^ todo then compare
-            var val2 = UseScaleBalance(groupTest1, groupTest2);
+            var lighterGroup = __spreadArrays(subSetC, subSetA); // swap 2 item from 2 left group 1 member go to left group one go to unscale group
+            var heavierGroup = __spreadArrays([subSetD[0], subSetB[0]], subSetE); // swap 1 item from right group 1 item go to right group 1 item go to unscale group ammd additional 2 normal ball to make it balance
+            var unScaleGroup = [subSetD[1], subSetB[1]]; // 2 item from both group that did not go to scale.
+            // swap between an element ^ todo then compare case left lighter than right
+            var val2 = UseScaleBalance(lighterGroup, heavierGroup);
             switch (val2) {
                 case 0: {
-                    twoBallComparison(groupTest3, subSetE.slice(0, 1));
+                    twoBallComparison(unScaleGroup, subSetE.slice(0, 1));
                     break;
                 }
                 case 1: {
