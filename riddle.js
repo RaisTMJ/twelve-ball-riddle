@@ -90,7 +90,7 @@ function TwelveBallRiddle(random, index) {
         }
         return ball;
     }
-    //1) start split to 6 subset and 3 group;
+    //1) start split to 6 subset and 3 group; todo
     // createSubset
     var subSetA = weights.slice(0, 2);
     var subSetB = weights.slice(2, 4);
@@ -111,7 +111,7 @@ function TwelveBallRiddle(random, index) {
             ball = groupTest[1];
         }
     }
-    // first main compare of group
+    // first main compare of group todo
     switch (UseScaleBalance(group1, group2)) {
         case 1: {
             var groupTest1 = __spreadArrays(subSetC, subSetA);
@@ -138,6 +138,7 @@ function TwelveBallRiddle(random, index) {
             var groupTest1 = __spreadArrays(subSetC, subSetA);
             var groupTest2 = __spreadArrays([subSetD[0], subSetB[0]], subSetE);
             var groupTest3 = [subSetD[1], subSetB[1]];
+            // swap between an element ^ todo then compare
             var val2 = UseScaleBalance(groupTest1, groupTest2);
             switch (val2) {
                 case 0: {
@@ -201,7 +202,7 @@ function input() {
                         })];
                 case 2:
                     response2 = _a.sent();
-                    for (i = 12; i > 0; i--) {
+                    for (i = 11; i >= 0; i--) {
                         TwelveBallRiddle(response2['value'], i);
                     }
                     console.log('success');

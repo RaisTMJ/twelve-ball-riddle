@@ -49,7 +49,7 @@ function TwelveBallRiddle(random?: number, index?: number) {
     }
 
 
-    //1) start split to 6 subset and 3 group;
+    //1) start split to 6 subset and 3 group; todo
     // createSubset
     let subSetA = weights.slice(0, 2);
     let subSetB = weights.slice(2, 4);
@@ -72,7 +72,7 @@ function TwelveBallRiddle(random?: number, index?: number) {
     }
 
 
-    // first main compare of group
+    // first main compare of group todo
     switch (UseScaleBalance(group1, group2)) {
         case 1: {
             let groupTest1 = [...subSetC, ...subSetA]
@@ -99,6 +99,8 @@ function TwelveBallRiddle(random?: number, index?: number) {
             let groupTest1 = [...subSetC, ...subSetA]
             let groupTest2 = [subSetD[0], subSetB[0], ...subSetE]
             let groupTest3 = [subSetD[1], subSetB[1]]
+
+            // swap between an element ^ todo then compare
             let val2 = UseScaleBalance(groupTest1, groupTest2);
             switch (val2) {
                 case 0: {
