@@ -1,4 +1,4 @@
-import { prompt } from 'prompts';
+import {prompt} from 'prompts';
 
 
 function TwelveBallRiddle(random?: number, index?: number) {
@@ -47,14 +47,20 @@ function TwelveBallRiddle(random?: number, index?: number) {
         }
         return ball;
     }
-    let group1: number[] = weights.slice(0, 4);
-    let group2: number[] = weights.slice(4, 8);
-    let group3: number[] = weights.slice(8, 12);
+
+
+    //1) start split to 6 subset and 3 group;
+    // createSubset
+    let subSetA = weights.slice(0, 2);
+    let subSetB = weights.slice(2, 4);
+    let subSetC = weights.slice(4, 6);
+    let subSetD = weights.slice(6, 8);
+    let subSetE = weights.slice(8, 10);
+    let subSetF = weights.slice(10, 12);
+    let group1: number[] = [...subSetA, ...subSetB];
+    let group2: number[] = [...subSetC, ...subSetD];
+    let group3: number[] = [...subSetE, ...subSetF];
     let ball: any = 'unknown';
-    let group1_1: number[] = group1.slice(0, 2);
-    let group1_2: number[] = group1.slice(2, 4);
-    let group2_1: number[] = group2.slice(0, 2);
-    let group2_2: number[] = group2.slice(2, 4);
 
     function twoBallComparison(groupTest: number[], compareBall: number[]) {
         let val3 = UseScaleBalance(groupTest.slice(0, 1), compareBall);
@@ -64,57 +70,59 @@ function TwelveBallRiddle(random?: number, index?: number) {
             ball = groupTest[1];
         }
     }
+
+
+    // first main compare of group
     switch (UseScaleBalance(group1, group2)) {
         case 1: {
-            let groupTest1 = [...group2_1, ...group1_1]
-            let groupTest2 = [group2_2[0], group1_2[0], ...group3.slice(0, 2)]
-            let groupTest3 = [group2_2[1], group1_2[1]]
+            let groupTest1 = [...subSetC, ...subSetA]
+            let groupTest2 = [subSetD[0], subSetB[0], ...subSetE]
+            let groupTest3 = [subSetD[1], subSetB[1]]
             let val2 = UseScaleBalance(groupTest1, groupTest2);
             switch (val2) {
                 case 0: {
-                    twoBallComparison(groupTest3, groupTest1.slice(0, 1));
+                    twoBallComparison(groupTest3, subSetE.slice(0, 1));
                     break
                 }
                 case -1: {
-                    ball = comparingIfTestGroupLighter(UseScaleBalance, group2_1, ball, group1_2);
+                    ball = comparingIfTestGroupLighter(UseScaleBalance, subSetC, ball, subSetB);
                     break
                 }
                 case 1: {
-                    ball = comparingIfTestGroupHeavier(UseScaleBalance, group1_1, ball, group2_2);
+                    ball = comparingIfTestGroupHeavier(UseScaleBalance, subSetA, ball, subSetD);
                     break
                 }
             }
             break;
         }
         case -1: {
-            let groupTest1 = [...group2_1, ...group1_1]
-            let groupTest2 = [group2_2[0], group1_2[0], ...group3.slice(0, 2)]
-            let groupTest3 = [group2_2[1], group1_2[1]]
+            let groupTest1 = [...subSetC, ...subSetA]
+            let groupTest2 = [subSetD[0], subSetB[0], ...subSetE]
+            let groupTest3 = [subSetD[1], subSetB[1]]
             let val2 = UseScaleBalance(groupTest1, groupTest2);
             switch (val2) {
                 case 0: {
-                    twoBallComparison(groupTest3, groupTest1.slice(0, 1));
+                    twoBallComparison(groupTest3, subSetE.slice(0, 1));
                     break
                 }
                 case 1: {
-                    ball = comparingIfTestGroupHeavier(UseScaleBalance, group2_1, ball, group1_2);
+                    ball = comparingIfTestGroupHeavier(UseScaleBalance, subSetC, ball, subSetB);
                     break
                 }
                 case -1: {
-                    ball = comparingIfTestGroupLighter(UseScaleBalance, group1_1, ball, group2_2);
+                    ball = comparingIfTestGroupLighter(UseScaleBalance, subSetA, ball, subSetD);
                     break
                 }
             }
             break;
         }
         case 0: {
-            let group3_1: number[] = group3.slice(0, 2);
-            let group3_2: number[] = group3.slice(2, 4);
-            let val = UseScaleBalance(group3_1, group2.slice(0, 2));
+            // group 3 is test here
+            let val = UseScaleBalance(subSetE, subSetA);
             if (val != 0) {
-                twoBallComparison(group3_1, group2.slice(0, 1));
+                twoBallComparison(subSetE, subSetA.slice(0, 1));
             } else {
-                twoBallComparison(group3_2, group2.slice(0, 1));
+                twoBallComparison(subSetF, subSetA.slice(0, 1));
             }
             break;
         }
@@ -134,15 +142,14 @@ function TwelveBallRiddle(random?: number, index?: number) {
 }
 
 
-
 function input() {
     // @ts-ignore
     (async () => {
         const response = await prompt({
-            type: 'text',
-            name: 'value',
-            message: 'Do you want to test manually y/n',
-        }
+                type: 'text',
+                name: 'value',
+                message: 'Do you want to test manually y/n',
+            }
         )
         if (response['value'] == 'y') {
             const response2 = await prompt({
@@ -156,8 +163,7 @@ function input() {
             }
             console.log('success')
 
-        }
-        else if (response['value'] == 'n') {
+        } else if (response['value'] == 'n') {
             let tryAgain: boolean = true
             let testCount: number = 0
             while (tryAgain) {

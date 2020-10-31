@@ -90,14 +90,18 @@ function TwelveBallRiddle(random, index) {
         }
         return ball;
     }
-    var group1 = weights.slice(0, 4);
-    var group2 = weights.slice(4, 8);
-    var group3 = weights.slice(8, 12);
+    //1) start split to 6 subset and 3 group;
+    // createSubset
+    var subSetA = weights.slice(0, 2);
+    var subSetB = weights.slice(2, 4);
+    var subSetC = weights.slice(4, 6);
+    var subSetD = weights.slice(6, 8);
+    var subSetE = weights.slice(8, 10);
+    var subSetF = weights.slice(10, 12);
+    var group1 = __spreadArrays(subSetA, subSetB);
+    var group2 = __spreadArrays(subSetC, subSetD);
+    var group3 = __spreadArrays(subSetE, subSetF);
     var ball = 'unknown';
-    var group1_1 = group1.slice(0, 2);
-    var group1_2 = group1.slice(2, 4);
-    var group2_1 = group2.slice(0, 2);
-    var group2_2 = group2.slice(2, 4);
     function twoBallComparison(groupTest, compareBall) {
         var val3 = UseScaleBalance(groupTest.slice(0, 1), compareBall);
         if (val3 != 0) {
@@ -107,58 +111,58 @@ function TwelveBallRiddle(random, index) {
             ball = groupTest[1];
         }
     }
+    // first main compare of group
     switch (UseScaleBalance(group1, group2)) {
         case 1: {
-            var groupTest1 = __spreadArrays(group2_1, group1_1);
-            var groupTest2 = __spreadArrays([group2_2[0], group1_2[0]], group3.slice(0, 2));
-            var groupTest3 = [group2_2[1], group1_2[1]];
+            var groupTest1 = __spreadArrays(subSetC, subSetA);
+            var groupTest2 = __spreadArrays([subSetD[0], subSetB[0]], subSetE);
+            var groupTest3 = [subSetD[1], subSetB[1]];
             var val2 = UseScaleBalance(groupTest1, groupTest2);
             switch (val2) {
                 case 0: {
-                    twoBallComparison(groupTest3, groupTest1.slice(0, 1));
+                    twoBallComparison(groupTest3, subSetE.slice(0, 1));
                     break;
                 }
                 case -1: {
-                    ball = comparingIfTestGroupLighter(UseScaleBalance, group2_1, ball, group1_2);
+                    ball = comparingIfTestGroupLighter(UseScaleBalance, subSetC, ball, subSetB);
                     break;
                 }
                 case 1: {
-                    ball = comparingIfTestGroupHeavier(UseScaleBalance, group1_1, ball, group2_2);
+                    ball = comparingIfTestGroupHeavier(UseScaleBalance, subSetA, ball, subSetD);
                     break;
                 }
             }
             break;
         }
         case -1: {
-            var groupTest1 = __spreadArrays(group2_1, group1_1);
-            var groupTest2 = __spreadArrays([group2_2[0], group1_2[0]], group3.slice(0, 2));
-            var groupTest3 = [group2_2[1], group1_2[1]];
+            var groupTest1 = __spreadArrays(subSetC, subSetA);
+            var groupTest2 = __spreadArrays([subSetD[0], subSetB[0]], subSetE);
+            var groupTest3 = [subSetD[1], subSetB[1]];
             var val2 = UseScaleBalance(groupTest1, groupTest2);
             switch (val2) {
                 case 0: {
-                    twoBallComparison(groupTest3, groupTest1.slice(0, 1));
+                    twoBallComparison(groupTest3, subSetE.slice(0, 1));
                     break;
                 }
                 case 1: {
-                    ball = comparingIfTestGroupHeavier(UseScaleBalance, group2_1, ball, group1_2);
+                    ball = comparingIfTestGroupHeavier(UseScaleBalance, subSetC, ball, subSetB);
                     break;
                 }
                 case -1: {
-                    ball = comparingIfTestGroupLighter(UseScaleBalance, group1_1, ball, group2_2);
+                    ball = comparingIfTestGroupLighter(UseScaleBalance, subSetA, ball, subSetD);
                     break;
                 }
             }
             break;
         }
         case 0: {
-            var group3_1 = group3.slice(0, 2);
-            var group3_2 = group3.slice(2, 4);
-            var val = UseScaleBalance(group3_1, group2.slice(0, 2));
+            // group 3 is test here
+            var val = UseScaleBalance(subSetE, subSetA);
             if (val != 0) {
-                twoBallComparison(group3_1, group2.slice(0, 1));
+                twoBallComparison(subSetE, subSetA.slice(0, 1));
             }
             else {
-                twoBallComparison(group3_2, group2.slice(0, 1));
+                twoBallComparison(subSetF, subSetA.slice(0, 1));
             }
             break;
         }
@@ -177,6 +181,7 @@ function TwelveBallRiddle(random, index) {
 }
 function input() {
     var _this = this;
+    // @ts-ignore
     (function () { return __awaiter(_this, void 0, void 0, function () {
         var response, response2, i, tryAgain, testCount;
         return __generator(this, function (_a) {
