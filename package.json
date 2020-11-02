@@ -1,0 +1,26 @@
+{
+  "name": "twelve-ball-riddle",
+  "version": "1.0.0",
+  "description": "just riddle",
+  "main": "riddle.js",
+  "dependencies": {
+    "prompts": "^2.4.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RaisTMJ/twelve-ball-riddle.git"
+  },
+  "keywords": [
+    "twelve-ball"
+  ],
+  "author": "Mohamad Rais",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RaisTMJ/twelve-ball-riddle/issues"
+  },
+  "homepage": "https://github.com/RaisTMJ/twelve-ball-riddle#readme"
+}
