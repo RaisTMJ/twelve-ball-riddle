@@ -183,6 +183,16 @@ function TwelveBallRiddle(random, index) {
 }
 function input() {
     var _this = this;
+    var name = [];
+    "rekatone".toString().split("").forEach(function (a) { return name.unshift([a]); });
+    console.log(name);
+    if ("enotaker" === name.join("")) {
+        console.log("Ye Hafizi Betul");
+    }
+    else {
+        console.log("Nope");
+    }
+    ;
     // @ts-ignore
     (function () { return __awaiter(_this, void 0, void 0, function () {
         var response, response2, i, tryAgain, testCount;

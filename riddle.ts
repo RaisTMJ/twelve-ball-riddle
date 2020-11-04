@@ -143,6 +143,16 @@ function TwelveBallRiddle(random?: number, index?: number) {
 
 
 function input() {
+
+    const name = []
+"rekatone".toString().split("").forEach(a  => name.unshift([a]));
+console.log(name);
+if("enotaker" === name.join("")){
+console.log("Ye Hafizi Betul");
+} else{
+console.log("Nope")
+};
+
     // @ts-ignore
     (async () => {
         const response = await prompt({
